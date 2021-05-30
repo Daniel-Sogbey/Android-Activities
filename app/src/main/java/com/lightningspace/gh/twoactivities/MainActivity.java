@@ -1,5 +1,6 @@
 package com.lightningspace.gh.twoactivities;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -37,5 +38,18 @@ public class MainActivity extends AppCompatActivity {
         intent.putExtra(EXTRA_MESSAGE, message);
         startActivityForResult(intent, TEXT_REQUEST);
         Log.d(TAG, "launchSecondActivity:Button CLICK! ");
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == TEXT_REQUEST){
+            if(resultCode == RESULT_OK){
+                String reply = data.getStringExtra(SecondActivity.EXTRA_REPLY);
+                mReplyHead.setVisibility(View.VISIBLE);
+                mReply.setText(reply);
+                mReply.setVisibility(View.VISIBLE);
+            }
+        }
     }
 }
