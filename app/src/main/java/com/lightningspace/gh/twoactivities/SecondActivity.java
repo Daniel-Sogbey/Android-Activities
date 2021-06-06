@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -25,11 +26,38 @@ public class SecondActivity extends AppCompatActivity {
         mReply = (EditText) findViewById(R.id.reply_text);
     }
 
+
+    @Override
+    public void onRestart() {
+        super.onRestart();
+        Log.d("LOG_TAG2", "onRestart");
+    }
+
+    @Override
+    public void onResume(){
+        super.onResume();
+        Log.d("LOG_TAG2", "onResume");
+    }
+
+    @Override
+    public void onStop () {
+        super.onStop();
+        Log.d("LOG_TAG2", "onStop");
+    }
+
+    @Override
+    public void onDestroy(){
+        super.onDestroy();
+        Log.d("LOG_TAG2", "onDestroy");
+    }
+
+
     public void returnReply (View view) {
         String reply = mReply.getText().toString();
         Intent replyIntent = new Intent();
         replyIntent.putExtra(EXTRA_REPLY,reply);
         setResult(RESULT_OK, replyIntent);
+        Log.d("LOG_TAG2", "End SecondActivity");
         finish();
     }
 }
